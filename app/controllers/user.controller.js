@@ -4,7 +4,8 @@ const db = require('../models');
 const User = db.user;
 
 exports.profile = async (req, res) => {
-  let token = req.session.token;
+  let token =
+    req.headers.authorization && req.headers.authorization.split(' ')[1];
   const jwt_token = await jwt.verify(token, config.secret);
   req.userData = jwt_token;
   const response = await User.findByPk(req.userData.id);
