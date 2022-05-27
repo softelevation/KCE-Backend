@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cookieSession({
-    name: "bezkoder-session",
+    name: "kce-session",
     secret: "COOKIE_SECRET", // should use as secret environment variable
     httpOnly: true,
     sameSite: 'strict'
@@ -34,7 +34,7 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to KCE ADVENTURE" });
 });
 
 // routes

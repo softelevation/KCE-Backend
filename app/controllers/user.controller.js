@@ -7,6 +7,11 @@ exports.profile = async (req, res) => {
   let token = req.session.token;
   const jwt_token = await jwt.verify(token, config.secret);
   req.userData = jwt_token;
-  const user = await User.findByPk(req.userData.id);
-  res.status(200).send(user);
+  const response = await User.findByPk(req.userData.id);
+  res.status(200).send({
+    id: response.id,
+    first_name: response.first_name,
+    last_name: response.last_name,
+    email: response.email,
+  });
 };
