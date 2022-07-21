@@ -10,4 +10,6 @@ module.exports = function(app) {
     next();
   });
   app.get('/api/profile', [authJwt.verifyToken], controller.profile);
+  app.get('/api/categories', [authJwt.verifyToken], controller.allCategories);
+  app.post('/api/experiences', [authJwt.verifyToken], controller.getExperience);
 };

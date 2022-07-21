@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 require('dotenv').config();
 
+app.use(express.static(__dirname + '/public'));
 // parse requests of content-type - application/json
 app.use(express.json());
 
