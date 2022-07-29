@@ -1,17 +1,14 @@
 module.exports = (sequelize, Sequelize) => {
   const Wishlist = sequelize.define('wishlist', {
-    country: {
-      type: Sequelize.STRING,
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
     },
-    city: {
-      type: Sequelize.STRING,
+    user_id: {
+      type: Sequelize.INTEGER,
     },
-    rating: {
-      type: Sequelize.STRING,
-    },
-    image: {
-      type: Sequelize.STRING,
-      allowNull: true,
+    experience_id: {
+      type: Sequelize.INTEGER,
     },
   });
 

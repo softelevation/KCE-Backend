@@ -10,4 +10,8 @@ module.exports = function(app) {
     next();
   });
   app.get('/api/profile', [authJwt.verifyToken], controller.profile);
+  app.get('/api/category', [authJwt.verifyToken], controller.categoryList);
+  app.get('/api/experience', [authJwt.verifyToken], controller.experienceList);
+  app.get('/api/experience/:cat_id', [authJwt.verifyToken], controller.experienceList);
+  app.post('/api/wishlist', [authJwt.verifyToken], controller.wishlistAdd);
 };

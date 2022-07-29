@@ -5,7 +5,7 @@ const User = db.user;
 
 verifyToken = (req, res, next) => {
   let token =
-    req.headers.authorization && req.headers.authorization.split(' ')[1];
+    req.headers.authorization && req.headers.authorization;
 
   if (!token) {
     return res.status(403).send({
