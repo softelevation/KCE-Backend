@@ -1,4 +1,5 @@
 const express = require("express");
+var path = require('path');
 const cors = require("cors");
 const cookieSession = require("cookie-session");
 
@@ -13,7 +14,7 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(
   cookieSession({
     name: "kce-session",
@@ -24,10 +25,10 @@ app.use(
 );
 
 // database
-const db = require("./app/models");
-const Role = db.role;
+// const db = require("./app/models");
+// const Role = db.role;
 
-db.sequelize.sync();
+// db.sequelize.sync();
 // force: true will drop the table if it already exists
 // db.sequelize.sync({force: true}).then(() => {
 //   console.log('Drop and Resync Database with { force: true }');

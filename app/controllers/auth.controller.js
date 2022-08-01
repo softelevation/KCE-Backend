@@ -15,22 +15,24 @@ exports.signup = async (req, res) => {
       password: bcrypt.hashSync(req.body.password, 8),
     });
 
-    if (req.body.roles) {
-      const roles = await Role.findAll({
-        where: {
-          name: {
-            [Op.or]: req.body.roles,
-          },
-        },
-      });
+    // if (req.body.roles) {
+    //   const roles = await Role.findAll({
+    //     where: {
+    //       name: {
+    //         [Op.or]: req.body.roles,
+    //       },
+    //     },
+    //   });
 
-      const result = user.setRoles(roles);
-      if (result) res.send({ message: 'User registered successfully!' });
-    } else {
+    //   const result = user.setRoles(roles);
+    //   if (result) res.send({ message: 'User registered successfully!' });
+    // } else {
       // user has role = 1
       const result = user.setRoles([1]);
+      // console.log('wwwwwwwwwwwww');
+      // console.log(user);
       if (result) res.send({ message: 'User registered successfully!' });
-    }
+    // }
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -38,6 +40,7 @@ exports.signup = async (req, res) => {
 
 exports.signin = async (req, res) => {
   try {
+    // console.log(req.body);
     const user = await User.findOne({
       where: {
         email: req.body.email,

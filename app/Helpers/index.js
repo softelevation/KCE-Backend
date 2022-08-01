@@ -1,6 +1,30 @@
 
-exports.isNumber = (n) => {
-  return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+exports.obj_multi_select = (obj, keys = null, status = true) => {
+  // 👈 return selected field of object in case of status false function return all given filed
+  // obj = dencrypted(obj.encrypt);
+  let return_obj = {};
+  if (this.check_array_length(keys)) {
+    for (let k = 0; k < keys.length; k++) {
+      if (status) {
+        if (this.check(obj[keys[k]])) {
+          return_obj[keys[k]] = obj[keys[k]];
+        }
+      } else {
+        if (this.check(obj[keys[k]])) {
+          return_obj[keys[k]] = obj[keys[k]];
+        } else {
+          return_obj[keys[k]] = '';
+        }
+      }
+    }
+  } else {
+    return_obj = obj;
+  }
+  return return_obj;
+};
+
+exports.check_and_return_value = (value) => {
+  return this.check(value) ? value : 0;
 };
 
 exports.check = (obj) => {
@@ -10,14 +34,6 @@ exports.check = (obj) => {
   } else {
     return false;
   }
-};
-
-exports.check_val_in_array = (myArray, key, value) => {
-  return myArray.some((e) => e[key] == value) ? true : false;
-};
-
-exports.check_and_return_value = (value) => {
-  return this.check(value) ? value : 0;
 };
 
 exports.check_array_length = (array, num = false) => {
@@ -55,42 +71,17 @@ exports.check_obj = (myObj, key = null) => {
   }
 };
 
-exports.check_isString = (value) => {
-  if (this.check(value) && typeof value === 'string') {
-    return true;
-  } else {
-    return false;
-  }
+exports.merge_object = (object1, object2) => {
+  return { ...object1, ...object2 };
 };
 
-exports.check_isNumber = (value) => {
-  if (this.check(value) && typeof value === 'number') {
-    return true;
-  } else {
-    return false;
+exports.filter_by_id = (target, input) => {
+  // 👈 return single value in array format from multidimensional array
+  let return_object = [];
+  if (this.check_array_length(target)) {
+    return_object = target.map(function (key) {
+      return key[input];
+    });
   }
+  return return_object;
 };
-
-exports.obj_multi_select = (obj, keys = null, status = true) => {
-  let return_obj = {};
-  if (this.check_array_length(keys)) {
-    for (let k = 0; k < keys.length; k++) {
-      if (status) {
-        if (this.check(obj[keys[k]])) {
-          return_obj[keys[k]] = obj[keys[k]];
-        }
-      } else {
-        if (this.check(obj[keys[k]])) {
-          return_obj[keys[k]] = obj[keys[k]];
-        } else {
-          return_obj[keys[k]] = '';
-        }
-      }
-    }
-  } else {
-    return_obj = obj;
-  }
-  return return_obj;
-};
-
-
