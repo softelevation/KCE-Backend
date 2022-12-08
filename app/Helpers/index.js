@@ -71,6 +71,10 @@ exports.check_obj = (myObj, key = null) => {
   }
 };
 
+exports.merge_object = (object1, object2) => {
+  return { ...object1, ...object2 };
+};
+
 exports.filter_by_id = (target, input) => {
   // 👈 return single value in array format from multidimensional array
   let return_object = [];
